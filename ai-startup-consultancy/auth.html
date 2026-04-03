@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In | AI Startup Consultancy</title>
+    <meta name="description" content="Access your AI startup growth dashboard. Hire AI startup consultancy for pricing, GTM strategy, and technical scale.">
+    
+    <!-- Google Fonts -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        :root {
+            /* Brand Colors extracted from Logo */
+            --color-primary: #00599a;
+            --color-primary-dark: #004c83; /* 15% darker than #00599a */
+            --color-accent: #ffcf01;
+            
+            /* System Colors - Playful Creative / Dark Minimal */
+            --color-background: #080808;
+            --color-surface: #121212;
+            --color-text: #ffffff;
+            --color-text-muted: #8e8e8e;
+            --color-border: #222222;
+            
+            /* Typography */
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            
+            /* Transitions */
+            --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--color-background);
+            color: var(--color-text);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1, h2, h3 {
+            letter-spacing: -0.03em;
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        /* Navigation */
+        header {
+            padding: 24px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(8, 8, 8, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-muted);
+        }
+
+        .nav-links a:hover {
+            color: var(--color-text);
+        }
+
+        .nav-links a.active {
+            color: var(--color-text);
+        }
+
+        .cta-nav {
+            background: var(--color-text);
+            color: var(--color-background);
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Main Content Area */
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 160px 20px 120px;
+        }
+
+        .auth-card {
+            width: 100%;
+            max-width: 480px;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            padding: 48px;
+            border-radius: 4px;
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .auth-header img {
+            margin-bottom: 24px;
+        }
+
+        .auth-header h1 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .auth-header p {
+            color: var(--color-text-muted);
+            font-size: 15px;
+        }
+
+        /* Tabs System */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--color-border);
+            margin-bottom: 32px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            color: var(--color-text-muted);
+            padding: 12px;
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border-bottom: 2px solid transparent;
+        }
+
+        .tab-btn.active {
+            color: var(--color-text);
+            border-bottom: 2px solid var(--color-accent);
+        }
+
+        /* Forms */
+        .auth-section {
+            display: none;
+        }
+
+        .auth-section.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--color-text-muted);
+        }
+
+        input {
+            width: 100%;
+            background: #1a1a1a;
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            padding: 12px 16px;
+            color: var(--color-text);
+            font-family: var(--font-sans);
+            font-size: 15px;
+            transition: var(--transition);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: var(--color-text);
+            color: var(--color-background);
+            border: none;
+            padding: 14px;
+            border-radius: 4px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 12px;
+            transition: var(--transition);
+        }
+
+        .btn-submit:hover {
+            opacity: 0.9;
+        }
+
+        .form-footer {
+            margin-top: 24px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--color-text-muted);
+        }
+
+        .form-footer a {
+            color: var(--color-accent);
+        }
+
+        /* Success Message */
+        [data-success] {
+            background: rgba(0, 89, 154, 0.1);
+            border: 1px solid var(--color-primary);
+            padding: 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            padding: 80px 40px;
+            border-top: 1px solid var(--color-border);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            background: var(--color-background);
+        }
+
+        .footer-brand p {
+            color: var(--color-text-muted);
+            font-size: 14px;
+            margin-top: 16px;
+            max-width: 240px;
+        }
+
+        .footer-links h4 {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 20px;
+            color: var(--color-text);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            font-size: 14px;
+            color: var(--color-text-muted);
+        }
+
+        .footer-links a:hover {
+            color: var(--color-primary);
+        }
+
+        .footer-bottom {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 40px;
+            border-top: 1px solid var(--color-border);
+            color: var(--color-text-muted);
+            font-size: 13px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 16px;
+        }
+
+        .social-icons svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--color-text-muted);
+            transition: var(--transition);
+        }
+
+        .social-icons svg:hover {
+            fill: var(--color-accent);
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 20px; }
+            .nav-links { display: none; }
+            .auth-card { padding: 32px 24px; }
+            footer { padding: 40px 20px; }
+        }
+    </style>
+  <base href="/ai-startup-consultancy/" />
+</head>
+<body>
+
+    <header>
+        <a href="index.html">
+            <img src="logo-tezt-yan-10.png" alt="AI Startup Consultancy logo" style="height:40px;object-fit:contain">
+        </a>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="auth.html" class="active">Sign In</a>
+            <a href="#form" class="cta-nav">Get Started</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="auth-card">
+            <div class="auth-header">
+                <h1>Welcome Back</h1>
+                <p>Launch and scale your AI product with expert advisory.</p>
+            </div>
+
+            <div class="tabs">
+                <button class="tab-btn active" id="tab-signup" onclick="toggleTab('signup')">Sign Up</button>
+                <button class="tab-btn" id="tab-signin" onclick="toggleTab('signin')">Sign In</button>
+            </div>
+
+            <!-- SIGN UP TAB (Backend Integrated) -->
+            <div id="signup-section" class="auth-section active">
+                <form data-backend="signup" onsubmit="handleSignup(event)">
+                    <input type="hidden" name="role" value="user">
+                    <div class="form-group">
+                        <label for="signup-email">Email Address</label>
+                        <input type="email" id="signup-email" name="email" required placeholder="name@company.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" name="password" minlength="6" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn-submit">Create Account</button>
+                    <p data-success id="signup-success-msg" style="display:none; color: var(--color-accent); font-weight: 500; margin-top: 1.5rem; border: 1px solid var(--color-border);">
+                        Registration successful! Redirecting to login...
+                    </p>
+                </form>
+                <div class="form-footer">
+                    By signing up, you agree to our <a href="#">Terms of Service</a>.
+                </div>
+            </div>
+
+            <!-- SIGN IN TAB (UI Only) -->
+            <div id="signin-section" class="auth-section">
+                <form onsubmit="return false;">
+                    <div class="form-group">
+                        <label for="signin-email">Email Address</label>
+                        <input type="email" id="signin-email" name="email" required placeholder="name@company.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="signin-password">Password</label>
+                        <input type="password" id="signin-password" name="password" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn-submit">Sign In</button>
+                </form>
+                <div class="form-footer">
+                    <a href="#">Forgot your password?</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-brand">
+            <img src="logo-tezt-yan-10.png" alt="AI Startup Consultancy logo" style="height:32px;object-fit:contain">
+            <p>Specialized consultancy for AI founders, CTOs, and venture studios scaling the next generation of intelligence.</p>
+        </div>
+        <div class="footer-links">
+            <h4>Consultancy</h4>
+            <ul>
+                <li><a href="index.html">GTM Strategy</a></li>
+                <li><a href="index.html">Pricing & Packaging</a></li>
+                <li><a href="index.html">Technical Advisory</a></li>
+                <li><a href="index.html">Investor Readiness</a></li>
+            </ul>
+        </div>
+        <div class="footer-links">
+            <h4>Company</h4>
+            <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="auth.html">Sign In</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms</a></li>
+            </ul>
+        </div>
+        <div class="footer-bottom">
+            <div>© 2026 AI Startup Consultancy. All rights reserved.</div>
+            <div class="social-icons">
+                <a href="#" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+                <a href="#" aria-label="Twitter">
+                    <svg viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.84 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleTab(tab) {
+            const signupSection = document.getElementById('signup-section');
+            const signinSection = document.getElementById('signin-section');
+            const signupTab = document.getElementById('tab-signup');
+            const signinTab = document.getElementById('tab-signin');
+
+            if (tab === 'signup') {
+                signupSection.classList.add('active');
+                signinSection.classList.remove('active');
+                signupTab.classList.add('active');
+                signinTab.classList.remove('active');
+            } else {
+                signupSection.classList.remove('active');
+                signinSection.classList.add('active');
+                signupTab.classList.remove('active');
+                signinTab.classList.add('active');
+            }
+        }
+
+        // Backend simulation for signup logic as requested
+        function handleSignup(event) {
+            event.preventDefault();
+            const successMsg = document.getElementById('signup-success-msg');
+            const form = event.target;
+
+            // In a real scenario, the data-backend="signup" would be intercepted.
+            // Here we show the success UI and handle the tab switch requirement.
+            
+            successMsg.style.display = 'block';
+            
+            // Requirement: After 2 seconds, auto-switch to Sign In tab
+            setTimeout(() => {
+                toggleTab('signin');
+                successMsg.style.display = 'none';
+                form.reset();
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
