@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | BookLux — The AI Luxury Concierge</title>
+    <link rel="icon" href="favicon-tezt-yan-10.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap');
+
+        :root {
+            --color-primary: #db2427;
+            --color-primary-dark: #ba1f21;
+            --color-background: #0a0a0a;
+            --color-surface: #161616;
+            --color-surface-alt: #222222;
+            --color-text: #ffffff;
+            --color-text-muted: #a0a0a0;
+            --color-border: #2a2a2a;
+            --color-accent: #ffffff;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --radius-pill: 100px;
+            --radius-card: 40px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.2s ease;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Layout Helpers */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(10, 10, 10, 0.95);
+            border-bottom: 1px solid var(--color-border);
+            padding: 20px 0;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--color-text-muted);
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--color-text);
+        }
+
+        .btn-pill {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: var(--radius-pill);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: var(--color-accent);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-primary-dark);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--color-border);
+            color: var(--color-text);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--color-surface);
+            border-color: var(--color-text-muted);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 100px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(48px, 8vw, 84px);
+            font-weight: 900;
+            line-height: 1.05;
+            margin-bottom: 24px;
+            letter-spacing: -2px;
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            color: var(--color-text-muted);
+            margin-bottom: 40px;
+            max-width: 500px;
+        }
+
+        .hero-image {
+            background-color: var(--color-surface);
+            border-radius: var(--radius-card);
+            aspect-ratio: 4/5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--color-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image::after {
+            content: "THE WORLD OF LUXURY AT YOUR COMMAND";
+            font-weight: 900;
+            font-size: 14px;
+            color: var(--color-primary);
+            position: absolute;
+            bottom: 40px;
+            letter-spacing: 4px;
+        }
+
+        /* Grid Sections */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .card {
+            background-color: var(--color-surface);
+            padding: 48px;
+            border-radius: var(--radius-card);
+            border: 1px solid var(--color-border);
+        }
+
+        .card-accent {
+            background-color: var(--color-primary);
+            color: var(--color-accent);
+        }
+
+        .card h3 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .card p {
+            color: var(--color-text-muted);
+            font-size: 16px;
+        }
+
+        .card-accent p {
+            color: var(--color-accent);
+            opacity: 0.9;
+        }
+
+        /* About Detailed Content */
+        .story-section {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .story-label {
+            font-weight: 900;
+            font-size: 14px;
+            color: var(--color-primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: sticky;
+            top: 120px;
+        }
+
+        .story-text h2 {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 32px;
+            line-height: 1.1;
+        }
+
+        .story-text p {
+            font-size: 18px;
+            color: var(--color-text-muted);
+            margin-bottom: 24px;
+        }
+
+        .highlight-box {
+            background-color: var(--color-surface-alt);
+            padding: 40px;
+            border-radius: var(--radius-card);
+            margin: 40px 0;
+            border-left: 8px solid var(--color-primary);
+        }
+
+        /* Values Section */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-top: 60px;
+        }
+
+        /* Contact Block */
+        .contact-block {
+            text-align: center;
+            background-color: var(--color-surface);
+            padding: 80px 40px;
+            border-radius: var(--radius-card);
+            border: 1px solid var(--color-border);
+        }
+
+        .contact-block h2 {
+            font-size: 42px;
+            font-weight: 900;
+            margin-bottom: 24px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item span {
+            display: block;
+            font-size: 14px;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .contact-item p {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            padding: 80px 0 40px;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand p {
+            margin-top: 20px;
+            color: var(--color-text-muted);
+            max-width: 300px;
+        }
+
+        .footer-links h4 {
+            font-weight: 800;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--color-text-muted);
+        }
+
+        .footer-links a:hover {
+            color: var(--color-primary);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 40px;
+            border-top: 1px solid var(--color-border);
+            color: var(--color-text-muted);
+            font-size: 14px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 16px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--color-surface);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-icon svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--color-text);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding-top: 140px;
+            }
+            .hero-image {
+                aspect-ratio: 16/9;
+            }
+            .grid-3, .values-grid {
+                grid-template-columns: 1fr;
+            }
+            .story-section {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .story-label {
+                position: static;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-content h1 {
+                font-size: 48px;
+            }
+            .contact-info {
+                flex-direction: column;
+                gap: 24px;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 24px;
+                text-align: center;
+            }
+        }
+    </style>
+  <base href="/booklux/" />
+</head>
+<body>
+
+    <nav>
+        <div class="container">
+            <a href="index.html">
+                <img src="logo-tezt-yan-10.png" alt="BookLux logo" style="height:40px;object-fit:contain">
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html" class="active">About</a>
+                <a href="auth.html">Sign In</a>
+                <a href="index.html" class="btn-pill btn-primary">Book Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="container hero">
+            <div class="hero-content">
+                <h1>Crafting the Future of High-End Travel.</h1>
+                <p>BookLux is the world’s first AI-driven chat concierge designed exclusively for the modern luxury traveler.</p>
+                <div class="cta-group">
+                    <a href="index.html" class="btn-pill btn-primary">Experience BookLux</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <!-- Visual representation of luxury/tech -->
+            </div>
+        </section>
+
+        <section class="container section-padding">
+            <div class="grid-3">
+                <div class="card">
+                    <h3>The Problem</h3>
+                    <p>Booking luxury services shouldn't feel like a full-time job. Between opaque pricing, dozens of vendors, and complex contracts, the joy of travel is often buried under logistics.</p>
+                </div>
+                <div class="card card-accent">
+                    <h3>The Vision</h3>
+                    <p>One interface. Instant quotes. Total transparency. We leverage advanced AI to consolidate the world’s most elite service providers into a single, discreet chat window.</p>
+                </div>
+                <div class="card">
+                    <h3>The Solution</h3>
+                    <p>Whether it’s a heavy jet for a transcontinental hop or a private chef for a villa in Capri, BookLux handles the complexity, the paperwork, and the changes.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="container section-padding">
+            <div class="story-section">
+                <div class="story-label">Our Philosophy</div>
+                <div class="story-text">
+                    <h2>We believe luxury is the absence of friction.</h2>
+                    <p>BookLux was founded to solve a singular frustration: Why is it easier to order a pizza than it is to charter a $50,000 private flight? For the high-net-worth individual, time is the only truly finite resource.</p>
+                    
+                    <div class="highlight-box">
+                        <p style="color: var(--color-text); font-weight: 600; margin-bottom: 0;">"Our mission is to return that time to our clients by providing a trusted advisor that never sleeps, never forgets a preference, and always delivers the best market rates."</p>
+                    </div>
+
+                    <p>Our platform connects users directly to jets, yachts, villas, and elite drivers. We don't just find options; we curate experiences based on years of industry data and real-time availability. From understanding APA in yacht charters to navigating the complexities of villa local taxes, our AI concierge is trained on the nuances that matter.</p>
+                    
+                    <div class="values-grid">
+                        <div class="card">
+                            <h3>Discretion</h3>
+                            <p>We operate with the highest standards of privacy. Your data and travel patterns are your own.</p>
+                        </div>
+                        <div class="card">
+                            <h3>Excellence</h3>
+                            <p>We only partner with vetted providers. If they don't meet the BookLux standard, they aren't on the platform.</p>
+                        </div>
+                        <div class="card">
+                            <h3>Agility</h3>
+                            <p>Plans change. Our system is built to handle re-bookings and modifications with zero hassle for the client.</p>
+                        </div>
+                        <div class="card">
+                            <h3>Clarity</h3>
+                            <p>No hidden fees. We provide clear example itineraries and price ranges so decisions can be made in seconds.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container section-padding">
+            <div class="contact-block">
+                <h2>Our Global Network</h2>
+                <p style="color: var(--color-text-muted); max-width: 700px; margin: 0 auto 40px;">BookLux serves clients globally, from the marinas of the Cote d'Azur to the ski chalets of Aspen. We are a digital-first concierge supported by a world-class network of luxury providers.</p>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span>Headquarters</span>
+                        <p>London • Dubai • Miami</p>
+                    </div>
+                    <div class="contact-item">
+                        <span>Partnerships</span>
+                        <p>partners@booklux.ai</p>
+                    </div>
+                    <div class="contact-item">
+                        <span>Concierge Support</span>
+                        <p>concierge@booklux.ai</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="logo-tezt-yan-10.png" alt="BookLux logo" style="height:35px;object-fit:contain">
+                    <p>The AI chat concierge for private jets, yachts, villas, and VIP experiences.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Experience</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About BookLux</a></li>
+                        <li><a href="auth.html">Sign In</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="index.html">Private Jets</a></li>
+                        <li><a href="index.html">Yacht Charters</a></li>
+                        <li><a href="index.html">Luxury Villas</a></li>
+                        <li><a href="index.html">Private Chefs</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 BookLux. All rights reserved.</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon">
+                        <svg viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
